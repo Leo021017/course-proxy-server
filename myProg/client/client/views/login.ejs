@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>登陆|Myproxy</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="static/css/fontawesome-all.min.css">
+	<!-- Flaticon CSS -->
+	<link rel="stylesheet" href="static/css/flaticon.css">
+	<!-- Google Web Fonts -->
+	<link href="static/css/css.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="static/css/style.css">
+
+</head>
+
+<body class="gray-bg">
+
+	<section class="fxt-template-animation fxt-template-layout19">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6 col-12 fxt-bg-img" data-bg-image="images/pic_l.jpg">
+					<div class="fxt-header">
+						<h1>Welcome To Myproxy</h1>
+						<p>一个简单的代理服务管理系统</p>
+						<a href="register" class="fxt-btn-ghost">Register</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-12 fxt-bg-color">
+					<div class="fxt-content">
+						<div class="fxt-form">
+							<h2>Login | 管理员登陆</h2>
+							<form method="POST">
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-3">
+										<input id="username" class="form-control" placeholder="账号" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-4">
+										<input id="password" type="password" class="form-control" name="password"
+											placeholder="********" required="required">
+										<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-3">
+										<div class="fxt-checkbox-area">
+											<div class="checkbox">
+												<input id="checkbox1" type="checkbox">
+												<label for="checkbox1">保持登陆状态</label>
+											</div>
+											<a href="#" class="switcher-text">忘记密码</a>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-5">
+										<div class="text-center">
+											<div id="login" class="fxt-btn-fill">登陆</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Mainly scripts -->
+	<!-- jquery-->
+	<script src="static/js/jquery-3.5.0.min.js"></script>
+	<!-- Bootstrap js -->
+	<script src="static/js/bootstrap.min.js"></script>
+	<!-- Imagesloaded js -->
+	<script src="static/js/imagesloaded.pkgd.min.js"></script>
+	<!-- Validator js -->
+	<script src="static/js/validator.min.js"></script>
+	<!-- Custom Js -->
+	<script src="static/js/main.js"></script>
+	<script>
+		//用ajax提交表单
+		$('#login').click(function () {
+			$.post("/doLogin", {
+				"username": $("#username").val(),
+				"password": $("#password").val()
+
+			}, function (result) {
+				if (result == "1") {
+					alert("登陆成功！跳转到首页！");
+					window.location.href = "/";
+				} else if (result == "-2") {
+					alert("密码错误");
+				} else if (result == "-1") {
+					alert("没有该用户");
+				} else if (result == "-3") {
+					alert("服务器错误！");
+				} else {
+					alert("未知原因，登陆失败");
+				}
+			});
+
+		});
+	</script>
+
+</body>
+
+</html>
